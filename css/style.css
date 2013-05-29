@@ -1,0 +1,862 @@
+body {
+    font-family: "微软雅黑";
+    line-height: 1.2em;
+}
+a, input {
+    font-family: "微软雅黑";
+}
+.icon {
+    background: url("images/sprite.png") no-repeat;
+}
+
+.icon-text-choose {
+    background-position: -356px -487px;
+    width: 97px;
+    height: 23px;
+}
+.icon.icon-pair-wrap {
+    background-position: -518px -173px;
+    width: 344px;
+    height: 296px;
+}
+.icon.icon-pair-text {
+    background-position: -187px -96px;
+    width: 289px;
+    height: 48px;
+}
+.icon.icon-single-info {
+    background-position: -500px -103px;
+    width: 80px;
+    height: 31px;
+}
+.icon.icon-pair-btn {
+    background-position: -598px -31px;
+    width: 131px;
+    height: 46px;
+}
+
+.icon.icon-index-btn {
+    background-position: -250px -33px;
+    width: 125px;
+    height: 40px;
+}
+
+.icon.icon-peidui-btn {
+    background-position: -16px -1040px;
+    width: 131px;
+    height: 46px;
+}
+
+.icon.icon-postcard-btn {
+    background-position: -172px -1040px;
+    width: 131px;
+    height: 46px;
+}
+.icon.icon-confirm {
+    background-position: -164px -476px;
+    width: 167px;
+    height: 48px;
+}
+.icon.icon-confirm-wrap {
+    background-position: -2px -573px;
+    width: 560px;
+    height: 334px;
+}
+.icon.icon-text-wrap {
+    background-position: -4px -906px;
+    width: 558px;
+    height: 80px;
+}
+.icon.icon-share-btn {
+    background-position: -717px -94px;
+    width: 131px;
+    height: 46px;
+}
+.sticker-box.blue .icon-font {
+
+}
+.sticker-box.pink .icon-font {
+    background-position: -247px 0;
+}
+.sticker-box.blue .icon-middle {
+    background-position: -82px 0;
+}
+.sticker-box.pink .icon-middle {
+    background-position: -328px 0;
+}
+.sticker-box.blue .icon-behind {
+    background-position: -164px 0;
+}
+.sticker-box.pink .icon-behind {
+    background-position: -409px 0;
+}
+
+.sticker-box.blue .icon-ok {
+    background-position: 0 -33px;
+    width: 125px;
+    height: 40px;
+}
+.sticker-box.pink .icon-ok {
+    background-position: -125px -33px;
+    width: 125px;
+    height: 40px;
+}
+
+.icon-choose-text {
+    background-position: -8px -486px;
+    width: 147px;
+    height: 23px;
+}
+
+.sticker-box .icon-ok {
+    position: absolute;
+    left: 203px;
+    top: 489px;
+}
+
+.sticker-box, .bg-wrap {
+    background: url("images/bg.png") no-repeat;
+    width: 760px;
+    height: 600px;
+    position: relative;
+}
+.sticker-box .sticker-choose {
+    position: absolute;
+    left: 88px;
+    top: 119px;
+}
+.sticker-box.pink .choose-btn, .sticker-box.blue .choose-btn {
+    width: 81px;
+    height: 26px;
+    float: left;
+    margin-right: 10px;
+}
+
+.sticker-box .icon-choose-text {
+    float: left;
+    margin-right: 13px;
+    margin-top: 2px;
+}
+
+.sticker-box .sticker-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.sticker-box .car-wrap {
+    background: url("images/sprite.png") no-repeat -6px -168px;
+    width: 498px;
+    height: 304px;
+    position: absolute;
+    left: 30px;
+    top: 169px;
+}
+.sticker-box .car-slide-content {
+    width: 161px;
+    height: 408px;
+    overflow: hidden;
+}
+.sticker-box .car-slide {
+    position: absolute;
+    left: 555px;
+    top: 63px;
+    width: 161px;
+    height: 408px;
+}
+
+.postcart-wrap .jcarousel-prev, .sticker-box .jcarousel-prev {
+    position: absolute;
+    left: 63px;
+    top: 0;
+    width: 33px;
+    height: 16px;
+    cursor: pointer;
+    background: url("images/sprite.png") no-repeat -10px -535px;
+}
+.postcart-wrap .jcarousel-next, .sticker-box .jcarousel-next {
+    position: absolute;
+    left: 63px;
+    bottom: 0;
+    width: 33px;
+    height: 16px;
+    cursor: pointer;
+    background: url("images/sprite.png") no-repeat -10px -551px;
+}
+
+.sticker-box .car-slide li {
+    position: relative;
+    height: 68px;
+    width: 161px;
+    overflow: hidden;
+    cursor: pointer;
+    background: url("images/sprite.png") no-repeat -12px -86px;
+}
+
+.sticker-box .jcarousel-container {
+    width: 161px;
+    height: 411px;
+    padding: 38px 0;
+}
+.sticker-box .jcarousel-clip {
+    width: 161px;
+    height: 408px;
+    overflow: hidden;
+}
+
+.confirm2-wrap .icon-confirm {
+    position: absolute;
+    left: 285px;
+    top: 54px;
+}
+.confirm2-wrap .icon-index-btn {
+    position: absolute;
+    left: 607px;
+    top: 28px;
+}
+.confirm2-wrap .icon-peidui-btn {
+    position: absolute;
+    left: 228px;
+    top: 519px;
+}
+.confirm2-wrap .icon-postcard-btn {
+    position: absolute;
+    left: 378px;
+    top: 519px;
+}
+.confirm2-wrap .icon-confirm-wrap {
+    position: absolute;
+    left: 100px;
+    top: 140px;
+    width: 560px;
+    height: 334px;
+    line-height: 334px;
+    text-align: center;
+}
+.confirm2-wrap .icon-text-wrap {
+    position: absolute;
+    left: 101px;
+    top: 451px;
+}
+.confirm2-wrap .icon-text-wrap textarea {
+    margin-left: 15px;
+    width: 518px;
+    height: 43px;
+    margin-top: 13px;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    font-weight: bold;
+    line-height: 1.1em;
+}
+.confirm2-wrap .icon-text-wrap textarea.placeholder {
+    color: #9e9e9e;
+}
+.confirm2-wrap .icon-share-btn {
+    position: absolute;
+    left: 316px;
+    top: 538px;
+}
+
+.postcart-wrap #car-choose {
+    position: absolute;
+    left: 179px;
+    top: 96px;
+}
+
+.postcart-wrap .icon-text-choose {
+    position: absolute;
+    left: 64px;
+    top: 122px;
+}
+
+.postcart-wrap #car-choose li {
+    background: url("images/sprite.png") no-repeat -574px -904px;
+    width: 121px;
+    height: 80px;
+    float: left;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.postcart-wrap .postcart-stage {
+
+    width: 524px;
+    height: 324px;
+    position: absolute;
+    left: 19px;
+    top: 190px;
+    border: 10px solid #d0d0d1;
+}
+.postcart-wrap .icon-share-btn {
+    position: absolute;
+    left: 229px;
+    top: 544px;
+}
+.postcart-wrap .postcard-slide-wrap {
+    position: absolute;
+    left: 578px;
+    top: 89px;
+}
+.postcart-wrap .postcard-slide-wrap li {
+    width: 159px;
+    border: 1px solid #b4b4b4;
+    height: 89px;
+    margin: 1px 0;
+    cursor: pointer;
+}
+.postcart-wrap .jcarousel-container {
+    width: 161px;
+    height: 373px;
+    padding: 38px 0;
+}
+.postcart-wrap .jcarousel-clip {
+    width: 161px;
+    height: 373px;
+    overflow: hidden;
+}
+.content_1 .car-wrap img {
+    width: 1175px;
+    position: absolute;
+    left: -334px;
+    top: -237px;
+}
+.content_2 .car-wrap img {
+    position: absolute;
+    top: -82px;
+    width: 710px;
+    left: -106px;
+}
+.content_3 .car-wrap img {
+    width: 1056px;
+    position: absolute;
+    left: -294px;
+    top: -186px;
+}
+.content_1 .car-slide li img {
+    position: absolute;
+    width: 786px;
+    left: -312px;
+    top: -198px;
+}
+.content_2 .car-slide li img {
+    width: 352px;
+    position: absolute;
+    top: -80px;
+    left: -114px;
+}
+.content_3 .car-slide li img {
+    width: 352px;
+    position: absolute;
+    top: -80px;
+    left: -100px;
+}
+.pair-wrap .icon-pair-text {
+    position: absolute;
+    left: 231px;
+    top: 101px;
+}
+.pair-wrap .icon-pair-btn {
+    position: absolute;
+    left: 310px;
+    top: 514px;
+}
+.pair-wrap .icon-index-btn {
+    position: absolute;
+    left: 607px;
+    top: 28px;
+}
+.single-box.left {
+    position: absolute;
+    left: 23px;
+    top: 165px;
+}
+.single-box.right {
+    position: absolute;
+    left: 386px;
+    top: 165px;
+}
+.pair-wrap .icon-single-info {
+    position: absolute;
+    bottom: 9px;
+    left: 128px;
+    text-align: center;
+    line-height: 31px;
+}
+.fav-middle {
+    background: url("images/favi-middle.png") repeat-x;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 6px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    position: relative;
+    color: #333;
+    text-decoration: none;
+    cursor: default;
+}
+.icon.icon-fav-left {
+    background-position: -599px -102px;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 0;
+    left: -35px;
+}
+.icon.icon-fav-right {
+    background-position: -670px -102px;
+    width: 19px;
+    height: 35px;
+    position: absolute;
+    top: 0;
+    right: -19px;
+}
+.fav-box {
+    position: absolute;
+    left: 396px;
+    top: 477px;
+    width: 335px;
+    height: 35px;
+    text-align: center;
+}
+.pair-wrap .jcarousel-container {
+    width: 272px;
+    height: 202px;
+    padding: 0 20px;
+}
+.pair-wrap  .jcarousel-clip {
+    width: 272px;
+    height: 202px;
+    overflow: hidden;
+}
+.pair-wrap .jcarousel-list li {
+    position: relative;
+    width: 272px;
+    height: 202px;
+    overflow: hidden;
+}
+.pair-wrap .single-wrap {
+    position: absolute;
+    left: 16px;
+    top: 34px;
+}
+.pair-wrap .single-wrap img {
+    margin-top: 43px;
+    margin-left: 3px;
+}
+
+.pair-wrap .jcarousel-prev {
+    position: absolute;
+    left: 0px;
+    top: 50%;
+    margin-top: -12px;
+    width: 15px;
+    height: 24px;
+    cursor: pointer;
+    background: url("images/sprite.png") no-repeat -74px -538px;
+}
+
+.pair-wrap .jcarousel-next {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -12px;
+    width: 15px;
+    height: 24px;
+    cursor: pointer;
+    background: url("images/sprite.png") no-repeat -91px -538px;
+}
+.mycar-img {
+    margin-left: 38px;
+    margin-top: 82px;
+}
+.bg2-wrap {
+    background: url("images/bg2.png") no-repeat 0 0;
+    width: 760px;
+    height: 600px;
+}
+.icon.icon-pop-text {
+    background-position: -501px -476px;
+    width: 215px;
+    height: 46px;
+    position: absolute;
+    left: 70px;
+    top: 35px;
+}
+.icon.icon-search-wrap {
+    background-position: -559px -1002px;
+    width: 228px;
+    height: 45px;
+    position: absolute;
+    left: 290px;
+    top: 36px;
+}
+.icon-search-wrap input {
+    height: 29px;
+    width: 159px;
+    position: absolute;
+    left: 21px;
+    top: 7px;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    font-weight: bold;
+    outline: none;
+}
+.icon-search-wrap button {
+    width: 32px;
+    height: 30px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    position: absolute;
+    right: 14px;
+    top: 7px;
+    cursor: pointer;
+}
+.icon.icon-search-text {
+    background-position: -738px -489px;
+    width: 37px;
+    height: 18px;
+    position: absolute;
+    left: 520px;
+    top: 49px;
+    cursor: pointer;
+}
+.popcar-box .icon-index-btn {
+    position: absolute;
+    left: 593px;
+    top: 38px;
+}
+
+.icon.icon-group-btn {
+    background-position: -572px -1123px;
+    width: 162px;
+    height: 34px;
+    position: absolute;
+    left: 142px;
+    top: 540px;
+}
+
+.icon.icon-prev-group {
+    background-position: -571px -1070px;
+    width: 125px;
+    height: 40px;
+    position: absolute;
+    left: 371px;
+    top: 535px;
+}
+
+.icon.icon-next-group {
+    background-position: -716px -1069px;
+    width: 125px;
+    height: 41px;
+    position: absolute;
+    left: 500px;
+    top: 535px;
+}
+.icon.icon-male {
+    background-position: -579px -772px;
+    width: 43px;
+    height: 22px;
+    position: absolute;
+    left: 204px;
+    top: 98px;
+}
+.icon.icon-female {
+    background-position: -644px -772px;
+    width: 38px;
+    height: 20px;
+    position: absolute;
+    left: 491px;
+    top: 100px;
+}
+.icon.icon-stage-m {
+    background-position: -627px -582px;
+    width: 245px;
+    height: 179px;
+    position: relative;
+}
+.icon.icon-favi-btn {
+    background-position: -640px -810px;
+    width: 42px;
+    height: 41px;
+}
+.icon.icon-favi-btn:hover, .icon.icon-favi-btn.favied {
+    background-position: -579px -810px;
+}
+.list-item .icon-favi-btn {
+    position: absolute;
+left: 5px;
+top: 132px;
+}
+.list-item .total-text {
+    position: absolute;
+left: 47px;
+top: 143px;
+font-size: 19px;
+color: #545454;
+font-weight: bold;
+}
+.list-wrap.left {
+    position: absolute;
+    left: 107px;
+    top: 116px;
+}
+.list-wrap .list-item {
+    margin: 18px 0;
+}
+.list-wrap.right {
+    position: absolute;
+    left: 395px;
+    top: 116px;
+}
+.pair-stage .pair-item {
+    position: relative;
+}
+.pair-stage .pair-box {
+    background: url("images/sprite.png") no-repeat -11px -1303px;
+    width: 525px;
+    height: 136px;
+}
+.pair-stage .pair-fiva {
+    background: url("images/sprite.png") no-repeat -563px -1324px;
+    width: 126px;
+    height: 94px;
+    position: absolute;
+    left: 542px;
+    top: 4px;
+}
+.pair-stage .fiva-total {
+    display: block;
+    margin-top: 14px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+}
+.pair-stage .icon-favi-btn {
+    position: absolute;
+    left: 43px;
+    top: 45px;
+    cursor: pointer;
+}
+.pair-stage {
+    position: absolute;
+    top: 105px;
+    left: 50px;
+}
+.icon-group-btn.ddd {
+    background-position: -574px -1182px;
+}
+.index-bg {
+    background: url("images/bg_index.jpg") no-repeat;
+    width: 760px;
+    height: 600px;
+}
+.map-popcar {
+    position: absolute;
+    left: 32px;
+    top: 197px;
+    width: 159px;
+    height: 32px;
+    cursor: pointer;
+}
+.map-poppair {
+    position: absolute;
+    left: 32px;
+    top: 162px;
+    width: 159px;
+    height: 32px;
+    cursor: pointer;
+}
+.map-male {
+    position: absolute;
+    left: 315px;
+    top: 518px;
+    width: 123px;
+    height: 40px;
+    cursor: pointer;
+}
+.map-female {
+    position: absolute;
+    left: 449px;
+    top: 517px;
+    width: 125px;
+    height: 40px;
+    cursor: pointer;
+}
+.icon-confirm-wrap img {
+    margin-top: 29px;
+    margin-left: 10px;
+}
+.icon-stage-m img {
+    margin-left: 9px;
+    margin-top: 3px;
+}
+.pair-item .img_1 {
+    margin-left: 19px;
+    margin-top: 6px;
+}
+.pair-item .img_2 {
+    margin-left: 34px;
+}
+#car-choose .p_img_1 {
+    width: 106px;
+    margin-left: 11px;
+    margin-top: 24px;
+}
+#car-choose .p_img_1 {
+    width: 106px;
+    margin-left: 11px;
+    margin-top: 26px;
+}
+#car-choose .p_img_2 {
+    width: 106px;
+    margin-left: 10px;
+    margin-top: 19px;
+}
+#car-choose .p_img_3 {
+    width: 106px;
+    margin-left: 10px;
+    margin-top: 22px;
+}
+#postcard-slide img {
+    width: 159px;
+    height: 89px;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
+#postcard-slide img:hover, #postcard-slide img.selected {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+#p_postcard img {
+    display: block;
+}
+#p_car .p_img_2, #p_car .p_img_3 {
+    position: absolute;
+    left: 47px;
+    top: 197px;
+    width: 232px;
+}
+#p_car .p_img_1 {
+    position: absolute;
+    left: 37px;
+    top: 200px;
+    width: 270px;
+}
+#p_text textarea {
+    position: absolute;
+    left: 351px;
+    top: 187px;
+    background: transparent;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    line-height: 39px;
+    width: 155px;
+    height: 90px;
+    border: none;
+    outline: none;
+}
+.single-box .sex_2 {
+    color: #ff5287;
+}
+.single-box .sex_1 {
+    color: #05b5e8;
+}
+.single-box.right .sex_1:after {
+    content: "GG的车";
+}
+.single-box.right .sex_2:after {
+    content: "MM的车";
+}
+.placeholder {
+    color: gray;
+}
+#p_text .placeholder {
+    color: #333;
+}
+
+#p_text textarea::-moz-placeholder, #p_text textarea::-webkit-placeholder {
+    color: #333;
+}
+.icon.pair-text1 {
+    width: 215px;
+    height: 45px;
+    background-position: -502px -523px;
+}
+.pop-mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    z-index: 9998;
+}
+.pop-alert {
+    background: url("images/sprite.png") no-repeat -11px -1454px;
+    width: 427px;
+    height: 212px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -213px;
+    margin-top: -156px;
+    z-index: 9999;
+}
+.pop-close {
+    position: absolute;
+    width: 96px;
+    height: 26px;
+    left: 166px;
+    top: 154px;
+}
+.p_nick_box {
+    position: absolute;
+    top: 91px;
+    left: 0;
+}
+.p_nick_box font {
+    display: block;
+    width: 126px;
+    text-align: center;
+    word-break: keep-all;/* 不换行 */
+    white-space: nowrap;/* 不换行 */
+    overflow: hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow: ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+.p_car_owner {
+    position: absolute;
+    right: 10px;
+    bottom: 17px;
+    width: 110px;
+    text-align: right;
+    word-break: keep-all;/* 不换行 */
+    white-space: nowrap;/* 不换行 */
+    overflow: hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow: ellipsis;
+}
+.logo{
+    position: absolute;
+    left: 44px;
+    top: 35px;
+    width: 150px;
+    height: 52px;
+    cursor: pointer;
+    z-index: 10000;
+}
+.index-bg .logo{
+    position: absolute;
+left: 25px;
+top: 36px;
+width: 150px;
+height: 96px;
+cursor: pointer;
+}

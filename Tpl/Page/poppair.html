@@ -1,0 +1,157 @@
+
+<div class="popcar-box">
+    <div class="bg2-wrap">
+        <font class="icon icon-pop-text pair-text1"></font>
+        <font class="icon icon-search-text"></font>
+        <a class="icon icon-index-btn" href="/index?from=app" title="返回首页"></a>
+        <a class="icon icon-group-btn ddd" href="/popcar" title="最受欢迎创意排行榜"></a>
+        <a class="icon icon-prev-group" id="prev-btn" href="#" title="上一组"></a>
+        <a class="icon icon-next-group" id="next-btn" href="#" title="下一组"></a>
+        <div class="icon icon-search-wrap">
+            <form id="search-form">
+                <input type="text" id="query-field"  name="query" placeholder="微博名称"/>
+                <button type="submit"></button>
+            </form>
+        </div>
+        <div class="pair-stage" id="pair-stage">
+            
+        </div>
+    </div>
+</div>
+<script id="item-tmpl" type="type/x-jquery-tmpl">
+    <div class="pair-item">
+        <div class="pair-box">
+            {{each(index,d) pair}}
+                <img class="img_${index}" src='/getImage?type=car4&sticker={"car_name":"${d["car_name"]}","sticker":{"1":${d["sticker_1"]},"4":${d["sticker_4"]},"5":${d["sticker_5"]}}}'>
+            {{/each}}
+        </div>
+        <div class="pair-fiva">
+            <font class="fiva-total">${total}</font>
+            
+            <a suda-uatrack = "key=ebusiness_apps&value={$Think.session.token.uid}:{$Think.WB_AKEY}:share::::pair" class="icon icon-favi-btn" data-id="${id}" data-nickname="['${pair['1']['nickname']}','${pair['2']['nickname']}']"></a>
+            <div class="p_nick_box">
+                <font>${pair['1']['nickname']}</font>
+                <font>${pair['2']['nickname']}</font>
+            </div>
+        </div>
+    </div>
+</script>
+<script>
+    
+    $("#query-field").placeholder();
+    //已投票
+    var favied = [];
+    (function(){
+        var $tmpl = $("#item-tmpl");
+        var Fun = function( name) {
+            this.page = 1;
+            this.total = 1;
+            this.name = name;
+            this.$list = $("#pair-stage");
+        }
+        Fun.prototype = {
+            buildList : function() {
+                var params = {
+                    "page" : this.page
+                }, that = this;
+                if (this.name) {
+                    params['name'] = encodeURI(this.name);
+                }
+                $.get("ajax/getPoppair", params, function(obj) {
+                    // debugger;
+                    that.total = obj['total'];
+                    
+                    that.$list.empty();
+                    $.each(obj['datas'], function(i,d) {
+                        $.each(d['pair'],function(k,car){
+                            var arr = [1,4,5];
+                            for(var i = 0;i<3;i++){
+                                var key = arr[i];
+                                if(!car['sticker_'+key]){
+                                    d['pair'][k]['sticker_'+key] = "null";
+                                }
+                            }
+                        });
+                        var $_tmpl = $tmpl.tmpl(d).appendTo(that.$list);
+                        $.each(favied,function(i,v){
+                            $_tmpl.find("[data-id='"+v+"']").addClass("favied");
+                        });
+                    });
+                })
+            },
+            prev : function() {
+                this.page--;
+                if (this.page < 1) {
+                    this.page = this.total;
+                }
+                this.buildList();
+            },
+            next : function() {
+                this.page++;
+                if (this.page > this.total) {
+                    this.page = 1;
+                }
+                this.buildList();
+            }
+        }
+        var fun;
+        $("#search-form").bind("submit", function() {
+            
+            var name = $("#query-field").val();
+            fun = new Fun(name);
+            fun.buildList();
+            return false;
+        }).submit();
+        $("#prev-btn").bind("click",function(){
+            fun.prev();
+        });
+        $("#next-btn").bind("click",function(){
+            fun.next();
+        });
+        //校验投票
+        (function(){
+            
+            var _Fn = {
+               "isFavied":function(id){
+                   var flag = false;
+                   $.each(favied,function(i,v){
+                       if(id == v){
+                           flag = true;
+                           return false;
+                       }
+                   });
+                   return flag;
+               },
+               "sticker":function($img){
+                   var src = $img.attr("src"),sticker = encodeURIComponent(/sticker=(.*)/.exec(src)[1]);
+                   return sticker;
+               }
+            };
+            $("#pair-stage").delegate(".icon-favi-btn","click",function(){
+                var id = $(this).data("id"),nicknames = eval($(this).data("nickname"));
+                var $imgs = $(this).closest(".pair-item").find("img");
+                    sticker1 = _Fn.sticker($($imgs[0]));
+                    sticker2 = _Fn.sticker($($imgs[1]));
+                    src = "getPair?type=publish&sticker1="+sticker1+"&sticker2="+sticker2;
+                    
+                    SHARE("我认为@"+nicknames[0]+" @"+nicknames[1]+" 设计出来的LEXUS雷克萨斯CT200h特别版让人不得不喜欢！狂顶TA的惊艳作品，力争榜首！大家都来为TA投票吧！",WEB_HOST+src);
+                if(_Fn.isFavied(id)){
+                    
+                }else{
+                    favied.push(id);
+                    $.post("/ajax/votePair",{id:id});
+                    var $total = $(this).prev(),total = parseInt($total.text());
+                    total++;
+                    $total.text(total);
+                    $(this).addClass("favied");
+                }
+            });    
+        })();
+        
+    })();
+</script>
+
+
+
+
+

@@ -1,0 +1,103 @@
+
+
+<div class="postcart-wrap">
+    <div class="bg-wrap">
+        <a href="http://www.lexus.com.cn/cn/CT200h/se/default.html" suda-uatrack = "key=ebusiness_apps&value={$Think.session.token.uid}:{$Think.WB_AKEY}:jump::::website" class="logo" target="_blank"></a>
+        <font class="icon icon-text-choose"></font>
+        <ul id="car-choose">
+            <for start="1" end="4" name="i">
+                <li>
+                    <img src='/getImage?type=car5_{$i}&sticker={$mysticker}' class="p_img_{$i}" data-dir="{$i}"/>
+                </li>
+            </for>
+        </ul>
+        <div class="postcart-stage" id="p_p_stage">
+            <div class="postcart-inner" style="position: relative;">
+                <div id="p_postcard"></div>
+                <div id="p_car"></div>
+                <div id="p_text">
+                    <textarea placeholder="一句你想说的话"></textarea>
+                </div>
+            </div>
+        </div>
+        <a id="p-share-btn" suda-uatrack = "key=ebusiness_apps&value={$Think.session.token.uid}:{$Think.WB_AKEY}:share::::postcard" class="icon icon-share-btn" href="#" title="分享到微博"></a>
+        <div class="postcard-slide-wrap">
+            <ul id="postcard-slide">
+                <foreach  name="postcard_names" item="name">
+                    <li>
+                        <img src="/images/postcard/{$name}.jpg" data-name="{$name}"/>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    var $p_postcard = $("#p_postcard"), $p_car = $("#p_car"), $lastcard;
+    $("#p_text textarea").placeholder();
+    $("#p-share-btn").bind("click", function() {
+        var sticker = '{$mysticker}', dir = $("#p_car img").data("dir"), postcard = $("#p_postcard img").data("name"), text = $("#p_text textarea").val();
+        var valid = true;
+        if(!text){
+            text = "";
+        }
+
+        if (!sticker || !dir || !postcard ) {
+            valid = false;
+        }
+        var len = getStrLen(text);
+        for(var i = 0;i<len;i+=14){
+            text = text.splice(i,0,"\r\n");
+        }
+        
+        if (valid) {
+            var params = ["postcard=" + postcard, "text=" + encodeURIComponent(text), "sticker=" + encodeURIComponent(sticker), "dir=" + dir].join("&");
+            SHARE("亲爱的@XXX，我为你精心设计了这张CT200h特别版明信片，无论多忙碌，我们都要抽时间出去走走，欣赏沿途的风景~~ ", WEB_HOST + "getPostcard?" + params);
+           
+            window.location.href = "/confirm2";
+        }
+    });
+    String.prototype.splice = function( idx, rem, s ) {
+        return (this.slice(0,idx) + s + this.slice(idx + Math.abs(rem)));
+    };
+    $('#postcard-slide').jcarousel({
+        vertical : true,
+        scroll : 1,
+        setupCallback : function() {
+            selectedCar($("#car-choose li:first"));
+            selected($("#postcard-slide li:first img"));
+        }
+    });
+
+    function selected($obj) {
+        if ($lastcard) {
+            $lastcard.removeClass("selected");
+        }
+        $lastcard = $obj.addClass("selected");
+        $obj.clone().appendTo($p_postcard.empty());
+
+    }
+
+    function getStrLen(str) {
+        var len = 0;
+        var cnstrCount = 0;
+        for (var i = 0; i < str.length; i++) {
+            if (str.charCodeAt(i) > 255)
+                cnstrCount = cnstrCount + 1;
+        }
+        len = str.length + cnstrCount;
+        return len;
+    }
+
+    function selectedCar($obj) {
+        $("img", $obj).clone().appendTo($p_car.empty());
+    }
+
+
+    $("#postcard-slide").delegate("img", "click", function() {
+        selected($(this));
+    });
+    $("#car-choose").delegate("li", "click", function() {
+        selectedCar($(this));
+    }); 
+</script>

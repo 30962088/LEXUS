@@ -1,0 +1,65 @@
+<!--[if lt IE 8]>
+<script src="/js/IE8.js?v=1"></script>
+<![endif]-->
+<div class="pair-wrap">
+    <div class="bg-wrap">
+        <a href="http://www.lexus.com.cn/cn/CT200h/se/default.html" suda-uatrack = "key=ebusiness_apps&value={$Think.session.token.uid}:{$Think.WB_AKEY}:jump::::website" class="logo" target="_blank"></a>
+        <font class="icon icon-pair-text"></font>
+        <a class="icon icon-index-btn" href="/index?from=app" title="返回首页"></a>
+        <a class="icon icon-pair-btn" href="#" title="完成配对" id="pair-ok"></a>
+        <div class="fav-box">
+            <a href="#" class="fav-middle">
+                <font id="fav-total">4398</font>
+                <span class="icon icon-fav-left"></span>
+                <span class="icon icon-fav-right"></span>
+            </a>
+        </div>
+        <div class="single-box icon icon-pair-wrap left">
+            <div class="single-inner">
+                <img src='/getImage?type=car3&sticker={$mysticker}' class="mycar-img"/>
+            </div>
+            <div class="icon icon-single-info sex_{$mysex}">我的车</div>
+        </div>
+        <div class="single-box icon icon-pair-wrap right">
+            <div class="single-inner">
+                <div class="single-wrap">
+                    <ul id="single-slide" data-count="{$count}">
+                        <foreach  name="datas" item="data">
+                            <li data-id="{$data['id']}" data-total="{$data['total']}">
+                                
+                                <img src='/getImage?type=car3&sticker={$data["sticker"]}'></img>
+                            </li>
+                        </foreach>
+                    </ul>
+                </div>
+            </div>
+            <div class="icon icon-single-info sex_{$sex}"></div>
+        </div>
+    </div>
+</div>
+<form id="pair-form" action="/confirm2" method="get">
+    <input type="hidden" name="type" value="pair"/>
+    <input type="hidden" name="pid" id="pid-field"/>
+</form>
+<script>
+    (function(){
+        var selectedId;
+        function selectCallback(jcarousel,obj){
+            selectedId=$(obj).data("id");
+            $("#fav-total").text($(obj).data("total"));
+        }
+        $('#single-slide').jcarousel({
+            scroll: 1,
+            wrap: 'circular',
+            itemVisibleInCallback: {
+              onBeforeAnimation: selectCallback
+            }
+            
+        });
+        $("#pair-ok").bind("click",function(){
+            $("#pid-field").val(selectedId);
+            $("#pair-form").submit();
+        });
+    })();
+    
+</script>

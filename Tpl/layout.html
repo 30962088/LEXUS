@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>雷克萨斯</title>
+        <link rel="stylesheet" href="/css/reset.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="/js/jquery-1.8.2.min.js"></script>
+        <script src="/js/jquery.tmpl.js"></script>
+        <script src="/js/jquery.jcarousel.min.js"></script>
+        <script src="/js/json2.js"></script>
+        <script src="/js/jquery.placeholder.js"></script>
+
+        <script>
+            var WEB_HOST = "<?php echo WEB_HOST?>";
+            var APP_KEY = "{$Think.WB_AKEY}";
+        </script>
+
+        <script type="text/javascript" charset="utf-8">
+            function NewWindow(hyperlink, name, features, center, width, height) {
+                if (center) {
+                    var winl = (screen.width - width) / 2;
+                    var wint = (screen.height - height) / 2;
+                    features = features + ', left=' + winl + ', top=' + wint;
+                }
+                window.open(hyperlink, name, features);
+            }
+
+            function SHARE(text, pic) {
+                if (!pic) {
+                    pic = "";
+                }
+                var _w = 72, _h = 16;
+                var param = {
+                    url : "http://e.weibo.com/{$Think.WB_DKEY}/app_" + APP_KEY,
+                    type : '3',
+                    count : '1', /**是否显示分享数，1显示(可选)*/
+                    appkey : APP_KEY, /**您申请的应用appkey,显示分享来源(可选)*/
+                    title : text, /**分享的文字内容(可选，默认为所在页面的title)*/
+                    pic : pic, /**分享图片的路径(可选)*/
+                    ralateUid : '', /**关联用户的UID，分享微博会@该用户(可选)*/
+                    language : 'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
+                    rnd : new Date().valueOf()
+                }
+                var temp = [];
+                for (var p in param ) {
+                    temp.push(p + '=' + encodeURIComponent(param[p] || ''))
+                }
+
+                NewWindow('http://service.weibo.com/share/share.php?' + temp.join('&'), "", "directories=1, height=500, location=1, menubar=1, resizable=1, scrollbars=1, status=1, toolbar=1, width=500", true, 500, 500);
+            }
+
+        </script>
+    </head>
+    <body>
+        <script type='text/javascript' charset="utf-8">
+            var SUDA = SUDA || [];
+            SUDA.push(['setGatherInfo', '', '{$TOKEN["uid"]}', APP_KEY]);
+        </script>
+        <script type="text/javascript" charset="utf-8" src="http://tjs.sjs.sinajs.cn/open/analytics/js/suda4sinaapp.js"></script>
+
+        {__CONTENT__}
+        <script>
+            $(".icon-search-text").bind("click", function() {
+                $("#search-form").submit();
+            });
+        </script>
+        <script src="http://js.t.sinajs.cn/t4/enterprise/js/public/appframe/client.js?version=1"></script>
+    </body>
+</html>
+

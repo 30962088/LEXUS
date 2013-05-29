@@ -1,0 +1,104 @@
+<div class="sticker-box {$theme}">
+   
+    <div id="pop-alert" style="display: none;">
+        <div class="pop-mask"></div>
+        <div class="pop-alert">
+            <a class="pop-close" href="#" id="pop-close"></a>
+        </div>
+    </div>
+     <a href="http://www.lexus.com.cn/cn/CT200h/se/default.html" suda-uatrack = "key=ebusiness_apps&value={$Think.session.token.uid}:{$Think.WB_AKEY}:jump::::website" class="logo" target="_blank"></a>
+    <for start="0" end="3" name="i">
+        
+        <div class="sticker-content content_{$i+1}" data-dir="{$car_dirs[$i]}" <if condition="$i gt 0 ">style="display:none;" </if>>
+            <div class="car-wrap" >
+                <div class="img-car-box">
+                    <img src="/images/car/small/{$car_dirs[$i]}/{$car_name}.png" class="img-car"/>
+                </div>
+                <div  class="img-sticker-box">
+                    
+                </div>
+                
+            </div>
+            <div class="car-slide">
+                
+                    <ul>
+                        <foreach  name="sticker_names" item="name">
+                            <li class="slide-item">
+                                <img src="/images/sticker/{$sticker_dirs[$i]}/{$name}.png" data-big="/images/sticker/{$sticker_dirs[$i]}/{$name}.png" data-name = "{$name}"/>   
+                            </li>
+                        </foreach >
+                    </ul>
+                
+                
+    
+            </div>
+        </div>
+    </for>
+    
+    
+    
+    <div class="sticker-choose">
+        <font class="icon icon-choose-text"></font>
+        <a class="choose-btn icon icon-font " data-index="0" href="#" title="前脸"></a>
+        <a class="choose-btn icon icon-middle " data-index="1" href="#" title="侧面"></a>
+        <a class="choose-btn icon icon-behind " data-index="2" href="#" title="车尾"></a>
+    </div>
+    <a href="#" class="icon icon-ok" id="sticker-ok" title="完成"></a>
+    <form action="/confirm" method="get" id="sticker-form">
+        <input name="data" id="data-field" type="hidden"/>
+    </form>
+</div>
+<script>
+    //切换tab
+    var CAR_NAME = "{$car_name}";
+    var SEX = "{$sex}";
+    var $popAlert = $("#pop-alert"),$popClose = $("#pop-close").bind("click",function(){
+        $popAlert.hide();
+    });
+    $(".sticker-box .choose-btn").bind("click",function(){
+       var index = $(this).data("index");
+       $(".sticker-content").hide();
+       $(".sticker-content:eq("+index+")").show();
+    });
+    //走马灯
+    $('.car-slide ul').jcarousel({
+        vertical: true,
+        scroll: 1,
+        wrap: 'circular'
+    });
+    //隐藏后2个tab
+    // $(".sticker-content:gt(0)").hide();
+    //选择车贴
+    $(".sticker-content").delegate(".slide-item","click",function(){
+       var $content = $(this).closest(".sticker-content"),$sticker = $content.find(".img-sticker-box").empty(),$img = $(this).find("img"),src = $img.data("big"),name = $img.data("name");
+       $sticker.append("<img src='"+src+"' data-name='"+name+"'/>");
+       
+    });
+    //完成
+    $("#sticker-ok").bind("click",function(){
+       var result = {};
+       $(".sticker-content").each(function(){
+           var dir = $(this).data("dir"),
+               name = $(".img-sticker-box img",this).data("name");
+           name=name?name:null;
+           result[dir] = name;
+       });
+       var flag = true;
+       for(var i in result){
+           if(result.hasOwnProperty(i)&&!result[i]){
+               
+               flag = false;
+               break;
+               
+           }
+       }
+       if(!flag){
+           $popAlert.show();
+       }
+       if(flag){
+           $("#data-field").val(JSON.stringify({car_name:CAR_NAME,sticker:result,"sex":SEX}));
+           $("#sticker-form").submit();
+       }
+    });
+    
+</script>

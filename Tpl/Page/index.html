@@ -1,0 +1,56 @@
+
+<script>
+    var IEversion = /MSIE (.*)/.exec(navigator.userAgent);
+    if (IEversion && parseInt(IEversion[1]) <= 6) {
+        alert("目前您正在使用IE6或更低版本的浏览器，建议您升级到最新IE版本或使用其他浏览器。");
+    }
+
+</script>
+<script src="http://js.t.sinajs.cn/t4/enterprise/js/public/appframe/client.js" type="text/javascript"></script>
+<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" type="text/javascript"></script>
+<script>
+    <?php
+
+    $arr_tokenString = explode(".", $_GET['tokenString']);
+    $TOKEN =json_decode(base64_decode($arr_tokenString[1]),true);
+    
+
+    if(!$TOKEN['oauth_token']){
+    ?>
+    App.AuthDialog.show({
+        client_id : "<?php echo $_GET['sub_appkey']; ?>", //必选，填入框架通过get方式传递的sub_appkey参数
+        redirect_uri : '{$Think.WB_CALLBACK_URL}',
+        //必选，授权回调地址，必须以http://e.weibo.com开头，类似http://e.weibo.com/1717871843/app_738247391
+        //或者http://e.weibo.com/thirdapp/app?appkey=738247391，不同企业应用的前台url是不固定的，需要用uid拼装
+        height : 0, //可选，默认距顶端120px
+        display : 'apponweibo' //必选，移动端H5授权则应为display: 'mobile'
+    });
+
+    <?php }else{
+
+    $c = new SaeTClientV2(WB_AKEY, WB_SKEY, $TOKEN['oauth_token']);
+    $user = $c -> show_user_by_id($TOKEN['user_id']);
+    $token = array(
+    "nickname"=>$user['name'],
+    "uid"=>$TOKEN['user_id']
+    );
+    $token['nickname'] = $user['name'];
+    session('token', $token);
+
+    // $_SESSION['token'] = $token;
+    // setcookie( 'weibojs_'.$o->client_id, http_build_query($token) );
+    cookie('weibojs_' . $o -> client_id, http_build_query($token));
+
+    }
+    
+    ?>
+</script>
+
+<div class="index-bg">
+    <a href="http://www.lexus.com.cn/cn/CT200h/se/default.html" suda-uatrack = "key=ebusiness_apps&value={$Think.session.token.uid}:{$Think.WB_AKEY}:jump::::website" class="logo" target="_blank"></a>
+    <a href="/poppair" class="map-popcar" title="最受欢迎组合排行榜"></a>
+    <a href="/popcar" class="map-poppair" title="最受欢迎创意排行榜"></a>
+    <a href="/sticker?sex=1" class="map-male" title="男生"></a>
+    <a href="/sticker?sex=2" class="map-female" title="女生"></a>
+</div>
+

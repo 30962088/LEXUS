@@ -1,0 +1,42 @@
+
+
+
+<div class="confirm2-wrap">
+    
+    <div class="bg-wrap">
+        <a href="http://www.lexus.com.cn/cn/CT200h/se/default.html" suda-uatrack = "key=ebusiness_apps&value={$Think.session.token.uid}:{$Think.WB_AKEY}:jump::::website" class="logo" target="_blank"></a>
+        <div class="icon icon-confirm"></div>
+        <a class="icon icon-index-btn" href="/index?from=app" title="返回首页"></a>
+        <a suda-uatrack = "key=ebusiness_apps&value={$Think.session.token.uid}:{$Think.WB_AKEY}:publish::::car" class="icon icon-share-btn" id="share-btn" href="###" title="分享到微博"></a>
+        <div class="icon icon-confirm-wrap" style="top: 110px;">
+            <img src='/getImage?type=confirm&sticker={$mysticker}'/>
+        </div>
+        <div class="icon icon-text-wrap">
+            <textarea id="tx-word" placeholder="输入文本"></textarea>
+        </div>
+    </div>
+</div>
+
+<script>
+    var text = "这/就/是/我/心/目/中/的/CT200h! 我参加了LEXUS雷克萨斯#打造我的个性CT#活动，这款CT200h就是我的风格、我的个性。朋友们快来排行榜为我的作品投票吧！";
+    var $tx = $("#tx-word").val(text);
+    $("#share-btn").bind("click",function(){
+        var _text = $tx.val();
+        if($.trim(_text).length==0){
+            _text=text;
+        }
+          
+          SHARE(_text,WEB_HOST+'getImage?type=confirm&sticker='+encodeURIComponent('{$mysticker}'));
+                    window.location.href="/confirm2?type=confirm";
+          
+       
+    });
+    
+    (function(){
+        var sticker = '{$sticker}';
+        var $btn = $("#share-btn");
+        
+        $('#tx-word').placeholder();
+    })();
+    
+</script>

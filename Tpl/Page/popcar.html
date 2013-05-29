@@ -1,0 +1,163 @@
+
+
+<div class="popcar-box">
+    <div class="bg2-wrap">
+        <font class="icon icon-pop-text"></font>
+        <font class="icon icon-search-text"></font>
+        <a class="icon icon-index-btn" href="/index?from=app" title="返回首页"></a>
+        <a class="icon icon-group-btn" href="/poppair" title="最受欢迎组合排行榜"></a>
+        <a class="icon icon-prev-group" id="prev-btn" href="#" title="上一组"></a>
+        <a class="icon icon-next-group" id="next-btn" href="#" title="下一组"></a>
+        <font class="icon icon-male"></font>
+        <font class="icon icon-female"></font>
+        <div class="icon icon-search-wrap">
+            <form id="search-form">
+                <input type="text" id="query-field"  name="query" placeholder="微博名称"/>
+                <button type="submit"></button>
+            </form>
+        </div>
+        <div class="list-wrap left" id="male-list">
+
+        </div>
+        <div class="list-wrap right" id="female-list">
+
+        </div>
+    </div>
+</div>
+<script id="item-tmpl" type="type/x-jquery-tmpl">
+    <div class="list-item icon icon-stage-m">
+    <img src='/getImage?type=car4&sticker={"car_name":"${car_name}","sticker":{"1":${sticker_1},"4":${sticker_4},"5":${sticker_5}}}'/>
+    <span class="total-text">${total}</span>
+    <a  suda-uatrack = "key=ebusiness_apps&value={$Think.session.token.uid}:{$Think.WB_AKEY}:share::::car" class="icon icon-favi-btn" href="javascript:void(0)" data-nickname="${nickname}" data-id="${id}"></a>
+    <font class="p_car_owner">${nickname}</font>
+    </div>
+</script>
+
+<script>
+
+    
+    var favied = [];
+    (function() {
+
+        var $tmpl = $("#item-tmpl");
+        $("#query-field").placeholder();
+        var Fun = function(sex, name) {
+            this.sex = sex;
+            this.page = 1;
+            this.total = 1;
+            this.name = name;
+            if (sex == 1) {
+                this.$list = $("#male-list");
+            } else {
+                this.$list = $("#female-list");
+            }
+        }
+        Fun.prototype = {
+            buildList : function() {
+                var params = {
+                    "page" : this.page,
+                    "sex" : this.sex
+                }, that = this;
+                if (this.name) {
+                    params['name'] = encodeURI(this.name);
+                }
+                $.get("ajax/getPopcar", params, function(obj) {
+                    // debugger;
+                    that.total = obj['total'];
+                    that.$list.empty();
+                    $.each(obj['datas'], function(i, d) {
+                        var arr = [1, 4, 5];
+                        for (var i = 0; i < 3; i++) {
+                            var key = arr[i];
+                            if (!d['sticker_' + key]) {
+                                d['sticker_' + key] = "null";
+                            }
+                        }
+                        var $_tmpl = $tmpl.tmpl(d).appendTo(that.$list);
+                        $.each(favied, function(i, v) {
+                            $_tmpl.find("[data-id='" + v + "']").addClass("favied");
+                        });
+                    });
+                })
+            },
+            prev : function() {
+                this.page--;
+
+                if (this.page < 1) {
+                    this.page = this.total;
+                }
+
+                this.buildList();
+            },
+            next : function() {
+                this.page++;
+                // console.info(this.page);
+                if (this.page > this.total) {
+                    this.page = 1;
+                }
+                this.buildList();
+            }
+        }
+
+        var FunMale, FunFemale;
+
+        $("#search-form").bind("submit", function() {
+
+            var name = $("#query-field").val();
+            FunMale = new Fun(1, name);
+            FunMale.buildList();
+            FunFemale = new Fun(2, name);
+            FunFemale.buildList();
+            return false;
+        }).submit();
+        $("#prev-btn").bind("click", function() {
+            FunMale.prev();
+            FunFemale.prev();
+        });
+        $("#next-btn").bind("click", function() {
+            FunMale.next();
+            FunFemale.next();
+        });
+        //校验投票
+        (function() {
+
+            var _Fn = {
+                "isFavied" : function(id) {
+                    var flag = false;
+                    $.each(favied, function(i, v) {
+                        if (id == v) {
+                            flag = true;
+                            return false;
+                        }
+                    });
+                    return flag;
+                }
+            };
+            $("body").delegate(".icon-favi-btn", "click", function() {
+                var id = $(this).data("id"),nickname=$(this).data("nickname");
+                var $img = $(this).siblings("img"),src=$img.attr('src'),
+                    url = WEB_HOST+"getImage?type=confirm&sticker="+encodeURIComponent(/sticker=(.*)/.exec(src)[1]);
+                    
+                     SHARE("我认为@"+nickname+" 设计出来的LEXUS雷克萨斯CT200h特别版让人不得不喜欢！狂顶TA的惊艳作品，力争榜首！大家都来为TA投票吧！",url);
+                if (_Fn.isFavied(id)) {
+
+                } else {
+                    
+                    favied.push(id);
+                    $.post("/ajax/vote", {
+                        id : id
+                    });
+                    var $total = $(this).prev(), total = parseInt($total.text());
+                    total++;
+                    $total.text(total);
+                    $(this).addClass("favied");
+                    
+                
+                    
+                }
+            });
+        })();
+
+    })(); 
+    
+</script>
